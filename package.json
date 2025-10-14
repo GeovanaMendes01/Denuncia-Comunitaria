@@ -1,0 +1,21 @@
+{
+  "name": "denuncia-comunitaria",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.ts"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "Geovana Mendes",
+  "license": "ISC",
+  "description": "Projeto que permitirá aos moradores registrarem e acompanharem problemas de infraestrutura e serviços públicos em seus bairros.",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.1",
+    "uuid": "^13.0.0"
+  }
+}
