@@ -41,3 +41,4 @@ jobs:
           --set-env-vars=MONGO_URI=${{ secrets.MONGO_URI }} \
           --platform=managed \
           --allow-unauthenticated
+      shell: bash
