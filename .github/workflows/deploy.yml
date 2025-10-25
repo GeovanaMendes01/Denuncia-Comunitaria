@@ -37,10 +37,12 @@ jobs:
       id: deploy
       uses: google-github-actions/deploy-cloudrun@v2
       with:
-        service: ${{ secrets.SERVICE_NAME }}
+        #service: ${{ secrets.SERVICE_NAME }}
         region: ${{ secrets.SERVICE_REGION }}
         image: southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest
-        flags: "--set-env-vars MONGO_URI=${{ secrets.MONGO_URI }}"
+        flags: |
+          ${{ secrets.SERVICE_NAME }} 
+          --set-env-vars MONGO_URI=${{ secrets.MONGO_URI }}
 
     - name: Show URL
       run: echo "Deploy concluído! Acesse em ${{ steps.deploy.outputs.url }}"
