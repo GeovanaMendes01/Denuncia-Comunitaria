@@ -1,4 +1,4 @@
-name: Deploy Denuncia Comunitaria
+name: Deploy Denúncia Comunitária
 
 on:
   push:
