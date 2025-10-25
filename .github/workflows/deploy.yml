@@ -34,6 +34,4 @@ jobs:
         docker push southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest
 
     - name: Manual Deploy to Cloud Run
-      run: |
-        gcloud run deploy ${{ secrets.SERVICE_NAME }} --image southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest --region=${{ secrets.SERVICE_REGION }} --set-env-vars MONGO_URI=${{ secrets.MONGO_URI }} --platform managed --allow-unauthenticated
-      shell: bash
+      run: bash -c "gcloud run deploy ${{ secrets.SERVICE_NAME }} --image southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest --region=${{ secrets.SERVICE_REGION }} --set-env-vars=MONGO_URI=${{ secrets.MONGO_URI }} --platform managed --allow-unauthenticated"
