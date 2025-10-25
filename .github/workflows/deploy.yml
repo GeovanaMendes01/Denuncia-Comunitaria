@@ -1,4 +1,4 @@
-name: Deploy Denuncia (teste)
+name: Deploy Denuncia Comunitaria
 
 on:
   push:
@@ -40,10 +40,7 @@ jobs:
         service: ${{ secrets.SERVICE_NAME }}
         region: ${{ secrets.SERVICE_REGION }}
         image: southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest
-        env_vars: |
-          MONGO_URI=${{ secrets.MONGO_URI }}
-        flags: |
-          --update-env-vars
+        flags: "--set-env-vars MONGO_URI=${{ secrets.MONGO_URI }}"
 
     - name: Show URL
       run: echo "Deploy concluído! Acesse em ${{ steps.deploy.outputs.url }}"
