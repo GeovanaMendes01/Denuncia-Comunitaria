@@ -10,6 +10,9 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.get("/", (req, res) => {
+  res.send("API de Denúncia Comunitária funcionando!");
+});
 app.use("/", denunciaRoutes); 
 
 const PORT = process.env.PORT || 8080;
