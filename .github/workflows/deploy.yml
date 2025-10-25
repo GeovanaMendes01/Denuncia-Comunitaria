@@ -33,14 +33,11 @@ jobs:
       run: |
         docker push southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest
 
-    - name: Deploy to Cloud Run
-      id: deploy
-      uses: google-github-actions/deploy-cloudrun@v2
-      with:
-        service: ${{ secrets.SERVICE_NAME }}
-        region: ${{ secrets.SERVICE_REGION }}
-        image: southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest
-        env_vars: MONGO_URI=${{ secrets.MONGO_URI }}
-
-    - name: Show URL
-      run: echo "Deploy concluído! Acesse em ${{ steps.deploy.outputs.url }}"
+    - name: Manual Deploy to Cloud Run
+      run: |
+        gcloud run deploy ${{ secrets.SERVICE_NAME }} \
+          --image=southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest \
+          --region=${{ secrets.SERVICE_REGION }} \
+          --set-env-vars=MONGO_URI=${{ secrets.MONGO_URI }} \
+          --platform=managed \
+          --allow-unauthenticated
