@@ -36,4 +36,4 @@ jobs:
           MONGO_URI=${{ secrets.MONGO_URI }}
           PORT=8080
     - name: Show URL
-      run:echo "Deploy concluído! Acesse em: ${{ steps.deploy.outputs.url }}"
+      run: echo "Deploy concluído! Acesse em ${{ steps.deploy.outputs.url }}"
