@@ -1,30 +1,38 @@
 name: Deploy Denuncia Comunitaria
+
 on:
   push:
     branches:
     - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
     - name: Google Auth
       id: auth
       uses: google-github-actions/auth@v2
       with:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
+
     - name: Configure Docker for Artifact Registry
       run: gcloud auth configure-docker southamerica-east1-docker.pkg.dev --quiet
+
     - name: Build Docker Image
-      run: >
+      run: |
         docker build -t southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest .
+
     - name: Push Image to Artifact Registry
-      run: >
+      run: |
         docker push southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest
+
     - name: Deploy to Cloud Run
       id: deploy
       uses: google-github-actions/deploy-cloudrun@v2
@@ -34,5 +42,6 @@ jobs:
         image: southamerica-east1-docker.pkg.dev/denuncia-comunitaria/denuncia-comunitaria/denuncia-comunitaria:latest
         env_vars: |
           MONGO_URI=${{ secrets.MONGO_URI }}
+
     - name: Show URL
       run: echo "Deploy concluído! Acesse em ${{ steps.deploy.outputs.url }}"
